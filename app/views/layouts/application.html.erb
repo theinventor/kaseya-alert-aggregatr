@@ -8,6 +8,11 @@
 </head>
 <body>
 
+<% if user_signed_in? %>
+<p>
+  <%= link_to "Alerts", email_alerts_path %> | <%= link_to "Settings", settings_path %>
+</p>
+<% end %>
 <%= yield %>
 
 </body>

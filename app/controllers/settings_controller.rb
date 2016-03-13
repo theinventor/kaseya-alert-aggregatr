@@ -69,6 +69,6 @@ class SettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def setting_params
-      params.require(:setting).permit(:always_alert_for_machine_pattern, :always_page_for_machine_pattern, :pager_email, :number_of_machines_in_single_group_to_page)
+      params.require(:setting).permit(:always_alert_for_machine_pattern, :always_page_for_machine_pattern, :alert_email, :pager_email, :number_of_machines_in_single_group_to_page)
     end
 end
