@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: MyString
+  machine_group: MyString
+  machine_name: MyString
+  all_params: MyText
+
+two:
+  subject: MyString
+  machine_group: MyString
+  machine_name: MyString
+  all_params: MyText

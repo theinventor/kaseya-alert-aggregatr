@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313191412) do
+ActiveRecord::Schema.define(version: 20160313192007) do
+
+  create_table "email_alerts", force: :cascade do |t|
+    t.string   "subject"
+    t.string   "machine_group"
+    t.string   "machine_name"
+    t.text     "all_params"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "settings", force: :cascade do |t|
     t.text     "always_alert_for_machine_pattern"

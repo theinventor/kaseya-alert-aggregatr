@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @email_alert.subject %>
+</p>
+
+<p>
+  <strong>Machine group:</strong>
+  <%= @email_alert.machine_group %>
+</p>
+
+<p>
+  <strong>Machine name:</strong>
+  <%= @email_alert.machine_name %>
+</p>
+
+<p>
+  <strong>All params:</strong>
+  <%= @email_alert.all_params %>
+</p>
+
+<%= link_to 'Edit', edit_email_alert_path(@email_alert) %> |
+<%= link_to 'Back', email_alerts_path %>

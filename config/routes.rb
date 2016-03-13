@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  resources :email_alerts
   devise_for :users
   resources :settings
-  root 'settings#index'
+  root 'email_alerts#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
