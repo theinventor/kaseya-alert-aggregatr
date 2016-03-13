@@ -17,32 +17,27 @@ class EmailAlert < ActiveRecord::Base
     subject.split(" ").first
   end
 
-  def self.clean_old_entries_from_db!
-    EmailAlert.where(created_at: Time.now-1.year..Time.now-3.days).delete_all
-  end
 
   def run_alerts!
     setting = Setting.first
     return mail_alert! unless setting #just bail if they aren't configured.
     #if matches a setting for always alert, do it now
-    if setting.alert_now_for_machine?(whole_machine_string)
-      mail_alert!
-    end
-
     if setting.page_now_for_machine?(whole_machine_string)
       page_alert!
+    elsif setting.alert_now_for_machine?(whole_machine_string)
+      mail_alert!
+    else
+      #else, setup a worker for 2 minutes from now to look for a group downtime
+      AlertWorker.perform_in(3.minutes,self.id)
     end
-
-    #else, setup a worker for 2 minutes from now to look for a group downtime
-    AlertWorker.perform_in(3.minutes,self.id)
   end
 
   def mail_alert!
-
+    AlertMailer.send_alert(self).deliver_now
   end
 
   def page_alert!
-
+    AlertMailer.send_page(self).deliver_now
   end
 
   #helper methods
@@ -55,6 +50,11 @@ class EmailAlert < ActiveRecord::Base
     subject.split(" ").size == 3 && is_offline?
   end
 
+
+
+  def self.clean_old_entries_from_db!
+    EmailAlert.where(created_at: Time.now-1.year..Time.now-3.days).delete_all
+  end
 
 end
 
