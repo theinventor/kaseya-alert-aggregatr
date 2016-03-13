@@ -2,6 +2,7 @@ class EmailAlert < ActiveRecord::Base
 
   serialize :all_params
   before_save :parse_machine_info
+  after_create :run_alerts!
 
   def parse_machine_info
     self.subject ||= "" #nil protection
@@ -14,6 +15,13 @@ class EmailAlert < ActiveRecord::Base
 
   def self.clean_old_entries_from_db!
     EmailAlert.where(created_at: Time.now-1.year..Time.now-3.days).delete_all
+  end
+
+  def run_alerts!
+    #if matches a setting for always alert, do it now
+
+    #else, setup a worker for 2 minutes from now to look for a group downtime
+    AlertWorker.perform_in(3.minutes,self.id)
   end
 
 
@@ -41,4 +49,5 @@ end
 #  all_params    :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  alert_fired   :boolean          default("f")
 #

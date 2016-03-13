@@ -56,3 +56,4 @@ gem 'devise'
 
 gem 'griddler', '1.3.0' #recieve emails from sendgrid easily
 gem 'griddler-sendgrid'
+gem 'sidekiq', '4.1.1'

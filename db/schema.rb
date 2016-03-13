@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313192007) do
+ActiveRecord::Schema.define(version: 20160313195302) do
 
   create_table "email_alerts", force: :cascade do |t|
     t.string   "subject"
     t.string   "machine_group"
     t.string   "machine_name"
     t.text     "all_params"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "alert_fired",   default: false
   end
 
   create_table "settings", force: :cascade do |t|
