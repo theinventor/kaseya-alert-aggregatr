@@ -44,6 +44,7 @@ group :development do
   gem 'spring'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  gem 'annotate'
 end
 
 group :production do
@@ -53,3 +54,5 @@ end
 gem 'thin'
 gem 'devise'
 
+gem 'griddler', '1.3.0' #recieve emails from sendgrid easily
+gem 'griddler-sendgrid'
