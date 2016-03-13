@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Time</th>
+      <th>PAGED</th>
       <th>Subject</th>
       <th>Machine group</th>
       <th>Machine name</th>
@@ -17,6 +18,7 @@
     <% @email_alerts.each do |email_alert| %>
       <tr>
         <td><%= l email_alert.created_at %></td>
+        <td><%= "YES" if email_alert.alert_fired %></td>
         <td><%= email_alert.subject %></td>
         <td><%= email_alert.machine_group %></td>
         <td><%= email_alert.machine_name %></td>

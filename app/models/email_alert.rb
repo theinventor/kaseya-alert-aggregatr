@@ -21,14 +21,18 @@ class EmailAlert < ActiveRecord::Base
   def run_alerts!
     setting = Setting.first
     return mail_alert! unless setting #just bail if they aren't configured.
+    puts "past settings.."
     #if matches a setting for always alert, do it now
     if setting.page_now_for_machine?(whole_machine_string)
+      puts "page now"
       page_alert!
     elsif setting.alert_now_for_machine?(whole_machine_string)
+      puts "mail now"
       mail_alert!
     else
       #else, setup a worker for 2 minutes from now to look for a group downtime
-      AlertWorker.perform_in(3.minutes,self.id)
+      # AlertWorker.perform_in(3.minutes,self.id)
+      alert_for_threshold!
     end
   end
 
@@ -38,6 +42,26 @@ class EmailAlert < ActiveRecord::Base
 
   def page_alert!
     AlertMailer.send_page(self).deliver_now
+  end
+
+  def alert_for_threshold!
+
+    the_group = machine_group
+    if EmailAlert.where(alert_fired: true).where(created_at: Time.now-60.minutes..Time.now).where(machine_group: the_group).any?
+      puts "ALREADY FIRED ONE FOR THIS GROUP IN LAST 60 MINUTES"
+      return false
+    end
+
+
+    the_count = EmailAlert.where(created_at: Time.now-15.minutes..Time.now).count
+    threshold = Setting.first.try(:number_of_machines_in_single_group_to_page) || 5
+
+    if the_count > threshold
+      #alert!
+      page_alert!
+      self.update_attributes(alert_fired: true)
+    end
+
   end
 
   #helper methods
