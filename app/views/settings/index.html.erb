@@ -22,7 +22,7 @@
         <td><%= setting.number_of_machines_in_single_group_to_page %></td>
         <td><%= link_to 'Show', setting %></td>
         <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
-        <td><%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Setting', new_setting_path %>
+<%= link_to 'New Setting', new_setting_path unless @settings.count >= 1 %>
