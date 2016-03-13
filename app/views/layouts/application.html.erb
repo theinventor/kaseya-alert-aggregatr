@@ -12,6 +12,13 @@
 <p>
   <%= link_to "Alerts", email_alerts_path %> | <%= link_to "Settings", settings_path %>
 </p>
+<span style="float:right;">
+  <% if Setting.first.try(:silence_now?) %>
+      <%= link_to "UN-SILENCE PAGER", setting_path(Setting.first_or_create,setting: {silence_now: false}), method: :patch %>
+  <% else %>
+      <%= link_to "silence pager", setting_path(Setting.first_or_create, setting: {silence_now: true}), method: :patch %>
+  <% end %>
+</span>
 <% end %>
 <%= yield %>
 

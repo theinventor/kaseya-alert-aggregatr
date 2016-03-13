@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313203639) do
+ActiveRecord::Schema.define(version: 20160313220157) do
 
   create_table "email_alerts", force: :cascade do |t|
     t.string   "subject"
@@ -28,9 +28,10 @@ ActiveRecord::Schema.define(version: 20160313203639) do
     t.text     "always_page_for_machine_pattern"
     t.string   "pager_email"
     t.integer  "number_of_machines_in_single_group_to_page"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
     t.string   "alert_email"
+    t.boolean  "silence_now",                                default: false
   end
 
   create_table "users", force: :cascade do |t|

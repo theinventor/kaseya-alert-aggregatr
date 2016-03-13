@@ -41,7 +41,7 @@ class EmailAlert < ActiveRecord::Base
   end
 
   def page_alert!
-    AlertMailer.send_page(self).deliver_now
+    AlertMailer.send_page(self).deliver_now unless Setting.first.try(:silence_now?)
   end
 
   def alert_for_threshold!
