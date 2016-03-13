@@ -9,6 +9,7 @@
 #  number_of_machines_in_single_group_to_page :integer
 #  created_at                                 :datetime         not null
 #  updated_at                                 :datetime         not null
+#  alert_email                                :string
 #
 
 require 'test_helper'

@@ -2,11 +2,12 @@
 
 <h1>Listing Settings</h1>
 
-<table>
+<table width="100%" border="1">
   <thead>
     <tr>
       <th>Always alert for machine pattern</th>
       <th>Always page for machine pattern</th>
+      <th>Alert email</th>
       <th>Pager email</th>
       <th>Number of machines in single group to page</th>
       <th colspan="3"></th>
@@ -18,6 +19,7 @@
       <tr>
         <td><%= setting.always_alert_for_machine_pattern %></td>
         <td><%= setting.always_page_for_machine_pattern %></td>
+        <td><%= setting.alert_email %></td>
         <td><%= setting.pager_email %></td>
         <td><%= setting.number_of_machines_in_single_group_to_page %></td>
         <td><%= link_to 'Show', setting %></td>
