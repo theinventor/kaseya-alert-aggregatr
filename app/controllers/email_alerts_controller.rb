@@ -4,7 +4,7 @@ class EmailAlertsController < ApplicationController
   # GET /email_alerts
   # GET /email_alerts.json
   def index
-    @email_alerts = EmailAlert.all
+    @email_alerts = EmailAlert.order("id desc").limit(300)
   end
 
   # GET /email_alerts/1

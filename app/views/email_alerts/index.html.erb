@@ -2,13 +2,13 @@
 
 <h1>Listing Email Alerts</h1>
 
-<table>
+<table border="1" width="100%">
   <thead>
     <tr>
+      <th>Time</th>
       <th>Subject</th>
       <th>Machine group</th>
       <th>Machine name</th>
-      <th>All params</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +16,10 @@
   <tbody>
     <% @email_alerts.each do |email_alert| %>
       <tr>
+        <td><%= l email_alert.created_at %></td>
         <td><%= email_alert.subject %></td>
         <td><%= email_alert.machine_group %></td>
         <td><%= email_alert.machine_name %></td>
-        <td><%= email_alert.all_params %></td>
         <td><%= link_to 'Show', email_alert %></td>
         <td><%= link_to 'Edit', edit_email_alert_path(email_alert) %></td>
         <td><%= link_to 'Destroy', email_alert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
