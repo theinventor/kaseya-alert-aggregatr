@@ -50,3 +50,6 @@ group :production do
   gem 'pg'
 end
 
+gem 'thin'
+gem 'devise'
+
