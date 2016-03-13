@@ -10,6 +10,9 @@ class EmailAlert < ActiveRecord::Base
     if is_offline_alert?
       self.machine_name = subject.split(" ").first.split(".").first
       self.machine_group = subject.split(" ").first.split(".")[1..-1].join(".")
+    elsif is_group_offline_alert?
+      self.machine_name = all_params.body.split("\n").third #?
+      self.machine_group = subject.split(" ").fifth
     end
   end
 
@@ -52,9 +55,13 @@ class EmailAlert < ActiveRecord::Base
       return false
     end
 
-
-    the_count = EmailAlert.where(created_at: Time.now-15.minutes..Time.now).count
     threshold = Setting.first.try(:number_of_machines_in_single_group_to_page) || 5
+
+    if is_group_offline_alert?
+      the_count = group_offline_count
+    else
+      the_count = EmailAlert.where(created_at: Time.now-15.minutes..Time.now).count
+    end
 
     if the_count > threshold
       #alert!
@@ -72,6 +79,14 @@ class EmailAlert < ActiveRecord::Base
 
   def is_offline_alert?
     subject.split(" ").size == 3 && is_offline?
+  end
+
+  def is_group_offline_alert?
+    subject.split(" ").size == 7 && subject.include?(" went offline")
+  end
+
+  def group_offline_count
+    subject.split(" ").first.to_i
   end
 
 
