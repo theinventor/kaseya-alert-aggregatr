@@ -1,0 +1,33 @@
+<%= form_for(@setting) do |f| %>
+  <% if @setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+
+      <ul>
+      <% @setting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :always_alert_for_machine_pattern %><br>
+    <%= f.text_area :always_alert_for_machine_pattern %>
+  </div>
+  <div class="field">
+    <%= f.label :always_page_for_machine_pattern %><br>
+    <%= f.text_area :always_page_for_machine_pattern %>
+  </div>
+  <div class="field">
+    <%= f.label :pager_email %><br>
+    <%= f.text_field :pager_email %>
+  </div>
+  <div class="field">
+    <%= f.label :number_of_machines_in_single_group_to_page %><br>
+    <%= f.number_field :number_of_machines_in_single_group_to_page %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

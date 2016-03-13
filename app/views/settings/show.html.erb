@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Always alert for machine pattern:</strong>
+  <%= @setting.always_alert_for_machine_pattern %>
+</p>
+
+<p>
+  <strong>Always page for machine pattern:</strong>
+  <%= @setting.always_page_for_machine_pattern %>
+</p>
+
+<p>
+  <strong>Pager email:</strong>
+  <%= @setting.pager_email %>
+</p>
+
+<p>
+  <strong>Number of machines in single group to page:</strong>
+  <%= @setting.number_of_machines_in_single_group_to_page %>
+</p>
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>
