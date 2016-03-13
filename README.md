@@ -15,7 +15,7 @@ Now it will batch up for you and email/page you when it really matters.
 
 ### Instructions ###
 
-1. Fork this repo, get a heroku account - and then #heroku create
+1. Fork this repo, get a heroku account - and then #heroku create (I would put this on the $7 hobby dyno, no worker needed currenty)
 2. Add the redis-cloud free redis addon
 3. Add the free sendgrid addon
 4. #heroku addons:open sendgrid 
