@@ -10,7 +10,7 @@ class AlertMailer < ApplicationMailer
     settings = Setting.first
 
 
-    mail to: settings.alert_email, subject: email_alert.subject
+    mail to: settings.alert_email, subject: email_alert.subject, from: ENV["FROM_EMAIL"]
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -23,6 +23,6 @@ class AlertMailer < ApplicationMailer
     settings = Setting.first
 
 
-    mail to: settings.pager_email, subject: email_alert.subject
+    mail to: settings.pager_email, subject: email_alert.subject, from: ENV["FROM_EMAIL"]
   end
 end
